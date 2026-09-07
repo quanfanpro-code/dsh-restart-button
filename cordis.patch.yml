@@ -1,0 +1,5 @@
+# dsh-restart-button bundle layer: mounts the plugin's host entry; the browser
+# half is discovered from the same entry's `dsh.client` declaration.
+- insert:
+    - id: restart-button
+      name: dsh-restart-button

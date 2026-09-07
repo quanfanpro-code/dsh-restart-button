@@ -1,0 +1,50 @@
+{
+  "name": "dsh-restart-button",
+  "version": "0.1.0",
+  "description": "在侧边栏“设置”旁提供一个“重启”按钮，一键重启 DeepSeek Harness 应用。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "platform": "web"
+    }
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml"
+  ],
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "restart"
+  ],
+  "author": {
+    "name": "quanfanpro-code",
+    "url": "https://github.com/quanfanpro-code"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quanfanpro-code/dsh-restart-button.git"
+  },
+  "bugs": {
+    "url": "https://github.com/quanfanpro-code/dsh-restart-button/issues"
+  },
+  "homepage": "https://github.com/quanfanpro-code/dsh-restart-button#readme",
+  "license": "MIT"
+}
