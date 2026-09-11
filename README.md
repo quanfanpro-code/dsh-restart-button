@@ -13,6 +13,12 @@ A [DeepSeek Harness](https://github.com/deepseek-ai) (DSH) plugin that adds a "R
 - 重启过程有遮罩提示；每次重启在本机桌面留下日志（Windows）
 - 走 DSH 官方插件机制（bundle 层 + 客户端插槽），可在插件市场中启用/停用/卸载
 
+## 版本适配 / Compatibility
+
+- v0.2.x：适配 DSH 0.1.5+（0.1.5 起 `connection.rpc.handle` 仅供核心内部使用，插件改为直接注入 `webServer` 注册路由，通信信封格式不变）
+- v0.1.x：适配 DSH 0.1.2
+
+
 ## 安装 / Install
 
 前置要求：Windows 10+、Node.js、pnpm、DeepSeek Harness（web profile）。

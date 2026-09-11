@@ -1,6 +1,6 @@
 {
   "name": "dsh-restart-button",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "在侧边栏“设置”旁提供一个“重启”按钮，一键重启 DeepSeek Harness 应用。",
   "type": "module",
   "main": "lib/index.js",
