@@ -1,6 +1,6 @@
 {
   "name": "dsh-restart-button",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "在侧边栏“设置”旁提供一个“重启”按钮，一键重启 DeepSeek Harness 应用。",
   "type": "module",
   "main": "lib/index.js",
@@ -15,7 +15,6 @@
     },
     "client": {
       "inject": [
-        "@deepseek-ai/dsh-client-runtime",
         "@deepseek-ai/dsh-client-ui-slots",
         "@deepseek-ai/dsh-client-connection",
         "@deepseek-ai/dsh-client-locale",
