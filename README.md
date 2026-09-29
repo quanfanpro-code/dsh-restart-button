@@ -15,6 +15,7 @@ A [DeepSeek Harness](https://github.com/deepseek-ai) (DSH) plugin that adds a "R
 
 ## 版本适配 / Compatibility
 
+- v0.2.3：修复 Windows 下点击重启后服务退出却没有重新启动的问题；增加真实 PowerShell 子进程存活测试。针对 DSH 0.2.0-rc.1 进行验证。
 - v0.2.x：适配 DSH 0.1.5+（0.1.5 起 `connection.rpc.handle` 仅供核心内部使用，插件改为直接注入 `webServer` 注册路由，通信信封格式不变）
 - v0.1.x：适配 DSH 0.1.2
 
@@ -45,13 +46,15 @@ dsh plugin --profile web add "<克隆目录的完整路径>"
 ## 工作原理 / How it works
 
 - **客户端**（浏览器内 cordis 插件）：向官方 `sidebar.footer.action` 插槽注册按钮组件；点击后通过 RPC 通道通知服务端，并轮询页面直到应用恢复后自动刷新。
-- **服务端**（Node 内 cordis 插件）：收到重启请求后，以脱离父进程（detached）方式拉起一个 PowerShell 脚本，然后应用自行退出；脚本检测到应用进程消失后，按 `node <bin.js> web --no-open` 重新启动 DSH，并在桌面写入 `插件重启结果.txt` 日志。
+- **服务端**（Node 内 cordis 插件）：收到重启请求后，通过 Windows 原生 `Start-Process -WindowStyle Hidden` 启动独立 PowerShell 脚本，确认启动器成功退出后应用才退出；脚本检测到应用进程消失后，按 `node <bin.js> web --no-open` 重新启动 DSH，并在桌面写入 `插件重启结果.txt` 日志。命令按 UTF-16LE 编码传递，支持中文、空格和单引号路径；启动失败时保留原服务并返回错误。
 - node 与入口脚本路径在运行时从当前进程获取，不写死路径。
 
 ## 自检 / Tests
 
 ```powershell
 node test/run.js
+node test/重启存活测试.js
+node test/重启页面测试.js
 # 输出 all checks passed 即通过
 ```
 

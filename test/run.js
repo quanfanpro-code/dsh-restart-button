@@ -10,10 +10,11 @@ const spec = buildRestartSpawn({
 	parentPid: 12345
 });
 assert.match(spec.file, /powershell\.exe$/i, "应调用系统 powershell.exe");
-assert.ok(spec.args.includes("-File"), "应以 -File 方式执行脚本");
-assert.ok(spec.args.some((a) => a.endsWith("restart.ps1")), "应指向包内 restart.ps1");
-assert.ok(spec.args.includes("12345"), "应传入父进程 PID");
-assert.equal(spec.opts.detached, true, "必须脱离父进程");
+const command = Buffer.from(spec.args.at(-1), "base64").toString("utf16le");
+assert.ok(command.includes('"-File"'), "应以 -File 方式执行脚本");
+assert.ok(command.includes("restart.ps1"), "应指向包内 restart.ps1");
+assert.ok(command.includes('"12345"'), "应传入父进程 PID");
+assert.equal(spec.opts.detached, false, "Windows PowerShell 不得使用会静默退出的 detached 模式");
 assert.equal(spec.opts.stdio, "ignore", "不应挂住父进程的 stdio");
 assert.equal(spec.opts.windowsHide, true, "不应弹出窗口");
 
